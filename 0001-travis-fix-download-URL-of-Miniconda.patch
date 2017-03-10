@@ -1,0 +1,28 @@
+From b8358496564fe191af2714b077290b76cb1a6c58 Mon Sep 17 00:00:00 2001
+From: Pavol Juhas <pavol.juhas@gmail.com>
+Date: Fri, 10 Mar 2017 11:35:41 -0500
+Subject: travis - fix download URL of Miniconda.
+
+---
+ .travis.yml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/.travis.yml b/.travis.yml
+index cb02985..7eb58d6 100644
+--- a/.travis.yml
++++ b/.travis.yml
+@@ -44,9 +44,9 @@ before_install:
+   - MYMCREPO=https://repo.continuum.io/miniconda
+   - case ${TRAVIS_OS_NAME} in
+     linux)
+-        MYMCBUNDLE=Miniconda-latest-Linux-x86_64.sh ;;
++        MYMCBUNDLE=Miniconda2-latest-Linux-x86_64.sh ;;
+     osx)
+-        MYMCBUNDLE=Miniconda-latest-MacOSX-x86_64.sh ;;
++        MYMCBUNDLE=Miniconda2-latest-MacOSX-x86_64.sh ;;
+     *)
+         echo "Unsupported operating system." >&2;
+         exit 2 ;;
+-- 
+2.12.0
+
