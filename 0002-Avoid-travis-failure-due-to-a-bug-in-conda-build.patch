@@ -1,35 +1,34 @@
-From d34e605ecb6fa445fbefa552276dd296a511e378 Mon Sep 17 00:00:00 2001
+From 668a55f183b14b0429ff7227075bae3ff1707594 Mon Sep 17 00:00:00 2001
 From: Pavol Juhas <pavol.juhas@gmail.com>
-Date: Fri, 10 Mar 2017 13:31:09 -0500
+Date: Wed, 22 Mar 2017 11:23:40 -0400
 Subject: Avoid travis failure due to a bug in conda-build.
 
-conda-build 2.1.6 gives (y/n) input prompt in the conda-install
+conda-build >=2.1.6 gives (y/n) input prompt in the conda-install
 command (ignoring the "--yes" flag) which makes the travis run freeze.
 
-Solution: Use different version of conda-build.
+Solution: pin conda-build at 2.1.5.
 
-Revert this once conda-build gets fixed.
+Revert this once conda/conda-build#1825 gets truly fixed.
 ---
- .travis.yml | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .travis.yml | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/.travis.yml b/.travis.yml
-index 7eb58d6..410b87d 100644
+index 7eb58d6..80b5f42 100644
 --- a/.travis.yml
 +++ b/.travis.yml
-@@ -62,6 +62,12 @@ before_install:
+@@ -62,6 +62,11 @@ before_install:
    - $NOMC || test -x ~/mc/bin/conda || bash ${MYMCBUNDLE} -b -f -p ~/mc
    - $NOMC || popd
    - $NOMC || export PATH="${HOME}/mc/bin:${PATH}"
 +
-+  # Avoid failure due to a bug in conda-build 2.1.6,
++  # Avoid failure due to a bug in conda-build 2.1.6, 2.1.7,
 +  # see https://github.com/conda/conda-build/issues/1825.
-+  # Use tee to verify there is no expansion of "!".
-+  - $NOMC || echo 'conda-build !=2.1.6' | tee ~/mc/conda-meta/pinned
++  - $NOMC || echo 'conda-build ==2.1.5' | tee ~/mc/conda-meta/pinned
 +
    - $NOMC || conda update --yes conda
    - $NOMC || conda install --yes conda-build jinja2
    - $NOMC || conda create --name=testenv --yes python=${MYPYTHON_VERSION} coverage
 -- 
-2.12.0
+2.12.1
 
