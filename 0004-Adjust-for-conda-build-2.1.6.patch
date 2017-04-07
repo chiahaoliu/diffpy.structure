@@ -1,0 +1,26 @@
+From b9e57e841007dcc2f47db91f9f15e363a79a9013 Mon Sep 17 00:00:00 2001
+From: Pavol Juhas <pavol.juhas@gmail.com>
+Date: Thu, 9 Mar 2017 18:23:21 -0500
+Subject: Adjust for conda-build 2.1.6.
+
+* adjust for yet another move of the conda-build test environment.
+---
+ .travis.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/.travis.yml b/.travis.yml
+index dae5b92..cb02985 100644
+--- a/.travis.yml
++++ b/.travis.yml
+@@ -73,7 +73,7 @@ before_install:
+ 
+ install:
+   - $NOMC || conda build --python=${MYPYTHON_VERSION} --dirty conda-recipe
+-  - $NOMC || MYCONDATESTENV="$(ls -td ~/mc/conda-bld/${MYNAME}_*/_t_env | head -1)"
++  - $NOMC || MYCONDATESTENV="$(ls -td ~/mc/conda-bld/${MYNAME}_*/_t_env* | head -1)"
+   - $NOMC || source activate ${MYCONDATESTENV:?"conda test environment not found"}
+   - $NOMC || conda list  --export ${MYNAME} > /tmp/mypackage.txt
+   - $NOMC || source activate testenv
+-- 
+2.12.2
+

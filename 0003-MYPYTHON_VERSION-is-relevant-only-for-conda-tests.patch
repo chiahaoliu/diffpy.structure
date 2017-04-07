@@ -1,0 +1,30 @@
+From c3689a1a895d17429ac04bab62800083c2bee19d Mon Sep 17 00:00:00 2001
+From: Pavol Juhas <pavol.juhas@gmail.com>
+Date: Thu, 9 Mar 2017 18:22:04 -0500
+Subject: MYPYTHON_VERSION is relevant only for conda tests.
+
+---
+ .travis.yml | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/.travis.yml b/.travis.yml
+index bce6dd2..dae5b92 100644
+--- a/.travis.yml
++++ b/.travis.yml
+@@ -8,11 +8,8 @@ os:
+   - osx
+ 
+ env:
+-  global:
+-    - MYPYTHON_VERSION=2.7
+-  matrix:
+-    - MYUSEMC=true
+-    - MYUSEMC=false
++  - MYUSEMC=true MYPYTHON_VERSION=2.7
++  - MYUSEMC=false
+ 
+ matrix:
+   exclude:
+-- 
+2.12.2
+
