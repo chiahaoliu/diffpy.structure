@@ -1,0 +1,30 @@
+From 1da4b19e4ae383d43522509a76c72d1f1945e56d Mon Sep 17 00:00:00 2001
+From: Pavol Juhas <pavol.juhas@gmail.com>
+Date: Thu, 6 Apr 2017 19:03:56 -0400
+Subject: TST: support test selection in the debug script.
+
+The debug.py utility takes optional regular-expression pattern
+to select specific test cases to be run.
+---
+ src/diffpy/srfit/tests/debug.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/diffpy/srfit/tests/debug.py b/src/diffpy/srfit/tests/debug.py
+index 3421010..e410f58 100644
+--- a/src/diffpy/srfit/tests/debug.py
++++ b/src/diffpy/srfit/tests/debug.py
+@@ -24,8 +24,10 @@ Exceptions raised by failed tests or other errors are not caught.
+ 
+ 
+ if __name__ == '__main__':
++    import sys
+     from diffpy.srfit.tests import testsuite
+-    suite = testsuite()
++    pattern = sys.argv[1] if len(sys.argv) > 1 else ''
++    suite = testsuite(pattern)
+     suite.debug()
+ 
+ 
+-- 
+2.12.2
+
